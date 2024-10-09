@@ -1,4 +1,4 @@
-import { calculateAverageTemperature } from '../components/weeklyWeatherForecastUtils';
+import { calculateAverageTemperature } from '../../components/weeklyWeatherForecastUtils';
 
 describe('calculateAverageTemperature', () => {
   it('calculates the average temperature correctly', () => {

@@ -1,7 +1,7 @@
 // fetchWeather.test.ts
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { fetchWeather } from '../screens/homeServiceUtils';
+import { fetchWeather } from '../../screens/homeServiceUtils';
 
 // Create an instance of the mock adapter
 const mock = new MockAdapter(axios);

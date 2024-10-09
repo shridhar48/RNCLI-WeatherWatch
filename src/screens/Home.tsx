@@ -10,9 +10,10 @@ import {
   ScrollView,
 } from 'react-native';
 import { fetchLocation, fetchWeather } from './homeServiceUtils';
-import getWeatherImage from '../getWeatherImage';
+
 import { DEFAULT_LOCATION } from './constants';
 import WeeklyWeatherForecast from '../components/WeeklyWeatherForecast';
+import getWeatherImage from '../helpers/getWeatherImage';
 
 const HomeScreen = () => {
   const [location, setLocation] = useState<string>(''); // type as string

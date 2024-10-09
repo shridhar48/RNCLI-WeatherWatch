@@ -1,8 +1,9 @@
 // WeeklyWeatherForecast.test.tsx
 import React from 'react';
 import { render } from '@testing-library/react-native';
-import WeeklyWeatherForecast from '../components/WeeklyWeatherForecast';
-import { DEFAULT_LOCATION } from '../screens/constants';
+
+import WeeklyWeatherForecast from '../../components/WeeklyWeatherForecast';
+import { DEFAULT_LOCATION } from '../../screens/constants';
 
 const mockGetWeatherImage = jest.fn(
   (weatherCode: number) => `https://example.com/weather/${weatherCode}.png`

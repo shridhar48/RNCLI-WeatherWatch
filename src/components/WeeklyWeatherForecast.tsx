@@ -1,8 +1,9 @@
 // WeeklyWeatherForecast.tsx
 import React from 'react';
 import { View, Text, Image, Dimensions } from 'react-native';
-import getWeatherImage from '../getWeatherImage';
+
 import { calculateAverageTemperature } from './weeklyWeatherForecastUtils';
+import getWeatherImage from '../helpers/getWeatherImage';
 
 const WeeklyWeatherForecast: React.FC<WeeklyWeatherForecastProps> = ({
   weatherData,
