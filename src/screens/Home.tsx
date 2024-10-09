@@ -22,22 +22,41 @@ const HomeScreen = () => {
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(
     null
   );
+  const [showNoData, setShowNoData] = useState(false);
 
   useEffect(() => {
     selectLocation(DEFAULT_LOCATION);
   }, []);
 
   const searchLocation = async () => {
-    const results = await fetchLocation(location);
-    setSearchResults(results);
+    try {
+      const results = await fetchLocation(location);
+      if (results && results.length > 0) {
+        setSearchResults(results);
+        setShowNoData(false);
+      } else {
+        setSearchResults([]);
+        setShowNoData(true);
+      }
+    } catch (error) {
+      console.error('error :', error);
+      setSearchResults([]);
+      setShowNoData(true);
+    }
   };
 
   const selectLocation = async (location: Location) => {
     setSelectedLocation(location);
-    const weather = await fetchWeather(location.latitude, location.longitude);
-    console.log('weather :', weather);
-    setWeatherData(weather);
-    setSearchResults([]);
+    try {
+      const weather = await fetchWeather(location.latitude, location.longitude);
+      setWeatherData(weather);
+      setSearchResults([]);
+    } catch (error) {
+      setWeatherData(null);
+      setSearchResults([]);
+      setShowNoData(true);
+      console.error('error :', error);
+    }
   };
 
   return (
@@ -48,8 +67,12 @@ const HomeScreen = () => {
         onChangeText={setLocation}
       />
       <Button title='Search' onPress={searchLocation} />
-
-      {searchResults.length > 0 && (
+      {showNoData && (
+        <View>
+          <Text>No results found</Text>
+        </View>
+      )}
+      {searchResults && searchResults.length > 0 && !showNoData && (
         <FlatList
           data={searchResults}
           keyExtractor={(item) => item.id.toString()}
@@ -59,7 +82,7 @@ const HomeScreen = () => {
         />
       )}
 
-      {weatherData && (
+      {weatherData && !showNoData && (
         <ScrollView showsVerticalScrollIndicator={false}>
           <WeeklyWeatherForecast
             weatherData={weatherData}
