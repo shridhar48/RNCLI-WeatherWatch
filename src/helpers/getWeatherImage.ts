@@ -6,36 +6,6 @@ type WeatherImage = Record<
   }
 >;
 
-type WeatherCode =
-  | '0'
-  | '1'
-  | '2'
-  | '3'
-  | '45'
-  | '48'
-  | '51'
-  | '53'
-  | '55'
-  | '56'
-  | '57'
-  | '61'
-  | '63'
-  | '65'
-  | '66'
-  | '67'
-  | '71'
-  | '73'
-  | '75'
-  | '77'
-  | '80'
-  | '81'
-  | '82'
-  | '85'
-  | '86'
-  | '95'
-  | '96'
-  | '99';
-
 const items: Record<WeatherCode, WeatherImage> = {
   '0': {
     day: {
@@ -328,8 +298,17 @@ const items: Record<WeatherCode, WeatherImage> = {
  * @param weatherCode The WMO weather code
  * @returns A "day" image representation of the WMO weather code
  */
-function getWeatherImage(weatherCode: WeatherCode) {
+function getWeatherImage(weatherCode: WeatherCode): string {
   // Write implementation for this function to return the "day" image for a given weather code.
+  const weatherImage = items[weatherCode];
+
+  // If the weather code does not exist, return undefined (or you could return a default image)
+  if (!weatherImage) {
+    return '';
+  }
+
+  // Return the 'day' image URL
+  return weatherImage.day.image;
 }
 
 export default getWeatherImage;
